@@ -1,9 +1,11 @@
 import React, {Component} from 'react'; 
+import { loadGoogleMap } from './utils';
 class SearchBox extends Component {
 
-   
+    
     onPlacesChanged(evt){
         console.log(evt.target.value);
+       
     }
 
     render(){
@@ -11,7 +13,7 @@ class SearchBox extends Component {
             <form>
                  
                 <div className="input-group input-group-lg" style={{boxShadow: '0px 6px 8px 4px grey', borderRadius: '10px'}}>
-                   <input type="text" ref="input" className="form-control" onChange={this.onPlacesChanged} placeholder="Search for a place" id="search-text"  />             
+                   <input type="text" id="search-bar" ref="input" className="form-control"  placeholder="Search for a place"   />             
                    <button className="btn btn-lg" id="button-submit"> <i className="fa fa-search "> Go </i> </button>
                    <button ><i className="fa fa-times"></i></button>
 
@@ -19,6 +21,22 @@ class SearchBox extends Component {
 
             </form>
         );
+    }
+
+    componentWillMount(){
+        loadGoogleMap();
+    }
+
+    handlePlaceSelect(){
+        console.log(this.autocomplete.getPlace());
+    }
+    setUpAutoComplete(google){
+        this.autocomplete = new google.maps.places.Autocomplete(
+            document.getElementById('search-bar')); 
+        this.autocomplete.addListener('place_changed',this.handlePlaceSelect);     
+    }
+    componentDidMount(){
+        loadGoogleMap().then((google) => this.setUpAutoComplete(google));
     }
 }
 
