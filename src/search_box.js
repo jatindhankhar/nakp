@@ -1,12 +1,7 @@
 import React, {Component} from 'react'; 
 import { loadGoogleMap } from './utils';
 class SearchBox extends Component {
-
-    
-    onPlacesChanged(evt){
-        console.log(evt.target.value);
-       
-    }
+   
 
     render(){
         return (
@@ -27,13 +22,12 @@ class SearchBox extends Component {
         loadGoogleMap();
     }
 
-    handlePlaceSelect(){
-        console.log(this.autocomplete.getPlace());
+    handlePlaceSelect(place){
+        console.log(place.geometry.location.lat(),place.geometry.location.lng());
     }
     setUpAutoComplete(google){
-        this.autocomplete = new google.maps.places.Autocomplete(
-            document.getElementById('search-bar')); 
-        this.autocomplete.addListener('place_changed',this.handlePlaceSelect);     
+        let autocomplete = new google.maps.places.Autocomplete(document.getElementById('search-bar')); 
+        autocomplete.addListener('place_changed',() => this.handlePlaceSelect(autocomplete.getPlace()));     
     }
     componentDidMount(){
         loadGoogleMap().then((google) => this.setUpAutoComplete(google));
