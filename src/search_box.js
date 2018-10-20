@@ -1,5 +1,7 @@
 import React, {Component} from 'react'; 
 import { loadGoogleMap } from './utils';
+import { Button, ButtonGroup } from 'reactstrap';
+
 class SearchBox extends Component {
    
 
@@ -7,11 +9,12 @@ class SearchBox extends Component {
         return (
             <form>
                  
-                <div className="input-group input-group-lg" style={{boxShadow: '0px 6px 8px 4px grey', borderRadius: '10px'}}>
-                   <input type="text" id="search-bar" ref="input" className="form-control"  placeholder="Search for a place"   />             
-                   <button className="btn btn-lg" id="button-submit"> <i className="fa fa-search "> Go </i> </button>
-                   <button ><i className="fa fa-times"></i></button>
-
+                <div className="input-group input-group-lg" >
+                   <input type="text" style={{ boxShadow: '#373737 0px 6px 8px 4px', borderRadius: '10px'}} id="search-bar" className="shadowed form-control" ref="input"  placeholder="Search for a place"   />
+                   <ButtonGroup style={{ boxShadow: '#373737 0px 6px 8px 4px', borderRadius: '10px', marginLeft: '15px'}} className="shadowed">             
+                   <Button color='white' id="button-submit"> <i className="fa fa-search "> Go </i> </Button>
+                   <Button onClick="" color="white" ><i className="fa fa-times"></i></Button>
+                   </ButtonGroup> 
                </div>
 
             </form>
