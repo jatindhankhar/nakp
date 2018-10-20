@@ -1,24 +1,25 @@
 import React,{ Component } from 'react';
 import {loadGoogleMap} from './utils'
 class GoogleMaps extends Component {
-    static defaultProps = {
-        center: {
-          lat: 28.5,
-          lng: 76.9
-        },
-        zoom: 8
-      };
-
-      
+    
+  
     componentWillMount(){
         loadGoogleMap();
       }
-
+    
+    componentWillReceiveProps(newProps){ 
+      if(this.map !== undefined && newProps.location) {
+          this.setState({location: newProps.location});
+          let location = new this.google.maps.LatLng(newProps.location.lat,newProps.location.lng)
+          this.map.panTo(location);
+      }
+    }  
     componentDidMount(){
         loadGoogleMap().then((google) => {
-          const map = new google.maps.Map(document.getElementById('map'), {
-            zoom: this.props.zoom,
-            center: this.props.center
+           this.google = google; 
+           this.map = new google.maps.Map(document.getElementById('map'), {
+            zoom: this.props.zoomLevel,
+            center: this.props.location
           });
         });
     

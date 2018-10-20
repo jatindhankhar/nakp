@@ -23,7 +23,12 @@ class SearchBox extends Component {
     }
 
     handlePlaceSelect(place){
-        console.log(place.geometry.location.lat(),place.geometry.location.lng());
+        debugger;
+        const location = {
+            lat: place.geometry.location.lat(),
+            lng: place.geometry.location.lng(),
+        }
+        this.props.syncLocation(location);
     }
     setUpAutoComplete(google){
         let autocomplete = new google.maps.places.Autocomplete(document.getElementById('search-bar')); 
