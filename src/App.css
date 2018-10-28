@@ -2,7 +2,88 @@
   text-align: center;
 }
 
-#app-container { position: relative; }
+html,
+body {
+  max-width: 100%;
+  max-height: 100%;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
 
-#over-map { position: absolute; top: 10px; left: 10px; z-index: 99; }
+body {
+  background-color: aqua;
+}
 
+#app-container {
+  position: relative;
+ transition: margin-left .5s;
+}
+
+#app-container.pushed {
+  margin-left: 200px;
+}
+#app-container form{
+  margin: 10px;
+
+}
+#over-map {
+  display: flex;
+  position: absolute;
+  top: 10px;
+  z-index: 99;
+}
+
+#toggle-sidebar {
+  margin: 10px;
+}
+#map {
+  max-width: 100%;
+  max-height: 100%;
+  height: 100vh;
+}
+
+
+.lifted {
+  box-shadow: #373737 0px 6px 8px 4px;
+  border-radius: 10px;
+}
+
+/* Thanks https://www.w3schools.com/howto/howto_js_sidenav.asp*/
+
+.sidenav {
+  height: 100%; 
+  width: 0;
+  position: fixed; 
+  z-index: 1; 
+  top: 0;
+  left: 0;
+  background-color: #111; 
+  overflow-x: hidden; 
+  padding-top: 60px;
+  transition: 0.5s;
+}
+
+.sidenav.open{
+  width: 200px;
+}
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
