@@ -8,8 +8,8 @@ let getGeoSearchUrlforLocation = (lat, lng, limit, thumbnailSize) => {
   return encodeURI(`${CORS_ANYWHERE_API}/${WIKI_API_URL}/?action=query&prop=coordinates|pageimages|pageterms&colimit=${limit}&piprop=thumbnail&pithumbsize=${thumbnailSize}&pilimit=${limit}&wbptterms=description&generator=geosearch&ggscoord=${lat}|${lng}&ggsradius=10000&ggslimit=${limit}&format=json`);
 }
 
-export const getPlacesInfo = (lat, lng, limit = 50, thumbnailSize = 144) => {
-  let targetUrl = getGeoSearchUrlforLocation(lat, lng, limit, thumbnailSize);
+export const getPlacesInfo = (location, limit = 50, thumbnailSize = 144) => {
+  let targetUrl = getGeoSearchUrlforLocation(location.lat, location.lng, limit, thumbnailSize);
   console.log(`Generating against following url ${targetUrl}`)
   return fetch(targetUrl, {
     method: 'GET',

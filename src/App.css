@@ -54,12 +54,12 @@ body {
   height: 100%; 
   width: 0;
   position: fixed; 
+  padding-top: 10px;
   z-index: 1; 
   top: 0;
   left: 0;
-  background-color: #111; 
+  background-color: transparent; 
   overflow-x: hidden; 
-  padding-top: 60px;
   transition: 0.5s;
 }
 
@@ -83,7 +83,7 @@ body {
 .sidenav .closebtn {
   position: absolute;
   top: 0;
-  right: 25px;
+  right: 10px;
   font-size: 36px;
   margin-left: 50px;
 }
