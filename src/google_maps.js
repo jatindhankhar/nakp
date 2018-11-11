@@ -30,12 +30,14 @@ class GoogleMaps extends Component {
     setLocation(newLocation){
       this.setState({location:newLocation});
       let location = new this.google.maps.LatLng(newLocation.lat,newLocation.lng)
-      console.log(`Target props are ${JSON.stringify(newLocation)}`)
       this.map.panTo(location);
       if(this.locationMarker) {this.locationMarker.setMap(null)}
       this.locationMarker = new this.google.maps.Marker({
         map: this.map,
         animation: this.google.maps.Animation.DROP,
+        icon: {
+          url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+        },
         position: location
       });
     }
@@ -47,7 +49,15 @@ class GoogleMaps extends Component {
     }
 
     makeMarkers(markerLocations){   
-      return markerLocations.map(location => new this.google.maps.Marker({ position: location,map: this.map}));
+      return markerLocations.map( (location,idx) => new this.google.maps.Marker({ 
+        position: location,
+        animation: this.google.maps.Animation.DROP,
+        map: this.map,
+        label: {
+         text: idx+1 + "",
+         fontWeight: "bold"
+        }
+      }));
     }
 
     addMarkers(){

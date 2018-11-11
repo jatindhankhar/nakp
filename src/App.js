@@ -25,7 +25,6 @@ class App extends Component {
   }
 
   syncMarkerLocations(markerLocations){
-    console.log(`Setting markerlocationsc ${markerLocations}`)
     this.setState({markerLocations: markerLocations});
   }
 
@@ -48,7 +47,6 @@ class App extends Component {
 
   setPlaces(response){
     this.setState({isLoading: false});
-    console.log(response.query)
     if(response.query)
       this.setState({places: Object.values(response.query.pages)});
   }
