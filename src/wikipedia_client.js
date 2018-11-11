@@ -10,7 +10,6 @@ let getGeoSearchUrlforLocation = (lat, lng, limit, thumbnailSize) => {
 
 export const getPlacesInfo = (location, limit = 50, thumbnailSize = 400) => {
   let targetUrl = getGeoSearchUrlforLocation(location.lat, location.lng, limit, thumbnailSize);
-  console.log(`Generating against following url ${targetUrl}`)
   return fetch(targetUrl, {
     method: 'GET',
     headers: {
