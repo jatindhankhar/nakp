@@ -15,8 +15,9 @@ class App extends Component {
     this.setPlaces = this.setPlaces.bind(this);
     this.fetchPlaces = this.fetchPlaces.bind(this);
     this.syncMarkerLocations = this.syncMarkerLocations.bind(this);
+    this.syncLocationIndex = this.syncLocationIndex.bind(this);
     /* Default Google Location */; 
-    this.state = {location: {lat: 28.5274229, lng: 77.1389453}, zoomLevel: 12, sidebarOpened:false, markerLocations: [], places: [], isLoading: true}
+    this.state = {location: {lat: 28.5274229, lng: 77.1389453}, zoomLevel: 12, sidebarOpened:false, markerLocations: [], places: [], isLoading: true, selectedIndex: undefined}
   }
 
   syncLocation(updatedLocation){
@@ -51,7 +52,9 @@ class App extends Component {
       this.setState({places: Object.values(response.query.pages)});
   }
 
-
+  syncLocationIndex(idx){
+    this.setState({selectedIndex: idx})
+  }
   toggleSidebar(){
     this.setState({sidebarOpened: !this.state.sidebarOpened})
   }
@@ -66,7 +69,8 @@ class App extends Component {
       <div id="app-container" className={this.state.sidebarOpened ? "pushed" : "" }>
           <GoogleMaps location={this.state.location} 
                       zoomLevel={this.state.zoomLevel}
-                      markerLocations={this.state.markerLocations} />
+                      markerLocations={this.state.markerLocations}
+                      selectedIndex={this.state.selectedIndex} />
 
           <div id="over-map"> 
              <Button color="info" id="toggle-sidebar" onClick={this.toggleSidebar}> <i className="fa fa-2x fa-bars"> </i> </Button> 
@@ -79,6 +83,7 @@ class App extends Component {
               isLoading={this.state.isLoading} 
               places={this.state.places}
               syncMarkerLocations={this.syncMarkerLocations}
+              syncLocationIndex={this.syncLocationIndex}
               />
 
       </div>

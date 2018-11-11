@@ -1,6 +1,5 @@
 import React, {Component} from 'react'; 
 import { loadGoogleMap } from './utils';
-import { Button, ButtonGroup } from 'reactstrap';
 
 class SearchBox extends Component {
    
@@ -10,9 +9,6 @@ class SearchBox extends Component {
             <form onSubmit={evt => evt.preventDefault()}>
                 <div className="input-group input-group-lg" >
                    <input type="text"  id="search-bar" className="lifted form-control" ref="input"  placeholder="Search for a place"   />
-                   <ButtonGroup className="lifted" style={{marginLeft: '15px'}}>             
-                   <Button color='white' id="button-submit"> <i className="fa fa-search "> Go </i> </Button>
-                   </ButtonGroup> 
                </div>
 
             </form>

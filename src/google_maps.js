@@ -1,5 +1,8 @@
 import React,{ Component } from 'react';
 import {loadGoogleMap} from './utils'
+import InfoWindow from './infoWindow'
+import ReactDOMServer from 'react-dom/server';
+
 class GoogleMaps extends Component {
     
     constructor(props){
@@ -8,6 +11,7 @@ class GoogleMaps extends Component {
       this.locationMarker = null;
       this.makeMarkers = this.makeMarkers.bind(this);
       this.setLocation = this.setLocation.bind(this);
+      this.presentLocations = [];
     }
     componentWillMount(){
         loadGoogleMap();
@@ -24,9 +28,14 @@ class GoogleMaps extends Component {
       else if(newProps.markerLocations !== this.props.markerLocations){
         this.markLocations(newProps.markerLocations);
       }
-
+      else if(newProps.selectedIndex !== this.props.selectedIndex){
+        this.showInfoWindow(newProps.selectedIndex);
+      }
     }
 
+    showInfoWindow(idx){
+       this.google.maps.event.trigger(this.markers[idx], 'click');
+    }
     setLocation(newLocation){
       this.setState({location:newLocation});
       let location = new this.google.maps.LatLng(newLocation.lat,newLocation.lng)
@@ -43,21 +52,37 @@ class GoogleMaps extends Component {
     }
     
     markLocations(markerLocations){
+      this.presentLocations = markerLocations;
       this.clearMarkers();
       this.markers = this.makeMarkers(markerLocations);
       this.addMarkers();
     }
 
     makeMarkers(markerLocations){   
-      return markerLocations.map( (location,idx) => new this.google.maps.Marker({ 
-        position: location,
+      return markerLocations.map( (location,idx) => this.makeMarker(location,idx));
+    }
+
+    makeMarker(location,idx){
+      let marker = new this.google.maps.Marker({ 
+        position: location.coordinates,
         animation: this.google.maps.Animation.DROP,
         map: this.map,
         label: {
          text: idx+1 + "",
          fontWeight: "bold"
         }
-      }));
+      });
+
+      let infoWindow = new this.google.maps.InfoWindow({
+        content: ReactDOMServer.renderToString(<InfoWindow title={location.title}
+                                                           wikiUrl={location.wikiUrl} 
+                                                           thumbnail={location.thumbnail}/>)
+      }); 
+
+    
+      marker.addListener('click',() => infoWindow.open(this.map, marker));
+      return marker;
+  
     }
 
     addMarkers(){
