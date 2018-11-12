@@ -1,15 +1,15 @@
 {
   "main.css": "/nakp/static/css/main.55384127.chunk.css",
-  "main.js": "/nakp/static/js/main.814d3880.chunk.js",
-  "main.js.map": "/nakp/static/js/main.814d3880.chunk.js.map",
+  "main.js": "/nakp/static/js/main.d5657ef5.chunk.js",
+  "main.js.map": "/nakp/static/js/main.d5657ef5.chunk.js.map",
   "static/css/1.248e3fa5.chunk.css": "/nakp/static/css/1.248e3fa5.chunk.css",
   "static/js/1.e2bfd7ed.chunk.js": "/nakp/static/js/1.e2bfd7ed.chunk.js",
   "static/js/1.e2bfd7ed.chunk.js.map": "/nakp/static/js/1.e2bfd7ed.chunk.js.map",
   "runtime~main.js": "/nakp/static/js/runtime~main.4bf4dd90.js",
   "runtime~main.js.map": "/nakp/static/js/runtime~main.4bf4dd90.js.map",
-  "static/css/main.55384127.chunk.css.map": "/nakp/static/css/main.55384127.chunk.css.map",
   "static/css/1.248e3fa5.chunk.css.map": "/nakp/static/css/1.248e3fa5.chunk.css.map",
+  "static/css/main.55384127.chunk.css.map": "/nakp/static/css/main.55384127.chunk.css.map",
   "index.html": "/nakp/index.html",
-  "precache-manifest.ee083ab5884a2fa05220d42304f3bfa4.js": "/nakp/precache-manifest.ee083ab5884a2fa05220d42304f3bfa4.js",
+  "precache-manifest.27fadcd6f2daaaa04233d39b78e9cb60.js": "/nakp/precache-manifest.27fadcd6f2daaaa04233d39b78e9cb60.js",
   "service-worker.js": "/nakp/service-worker.js"
 }
