@@ -12,6 +12,7 @@ class GoogleMaps extends Component {
       this.makeMarkers = this.makeMarkers.bind(this);
       this.setLocation = this.setLocation.bind(this);
       this.presentLocations = [];
+      this.prevWindow = null;
     }
     componentWillMount(){
         loadGoogleMap();
@@ -79,8 +80,14 @@ class GoogleMaps extends Component {
                                                            thumbnail={location.thumbnail}/>)
       }); 
 
-    
-      marker.addListener('click',() => infoWindow.open(this.map, marker));
+    marker.addListener('click', () => {
+      if (this.prevWindow)
+        this.prevWindow.close();
+      this.prevWindow = infoWindow;
+      infoWindow.open(this.map, marker)
+    });
+
+
       return marker;
   
     }
