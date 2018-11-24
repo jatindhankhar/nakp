@@ -24,7 +24,14 @@ Demo is available here [https://jatindhankhar.in/nakp](https://jatindhankhar.in/
 
 ## How to Run it 
 
+#### Development 
+
 1. Clone the repo
 2. Go to the directory
 3. Run it with `npm start`
 4. Hack! :octocat: :computer:
+
+#### Production Build
+1. Clone the repo
+2. Go to the directory
+3. Run it with `npm run build`
