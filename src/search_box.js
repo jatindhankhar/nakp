@@ -8,7 +8,7 @@ class SearchBox extends Component {
         return (
             <form onSubmit={evt => evt.preventDefault()}>
                 <div className="input-group input-group-lg" >
-                   <input type="text"  id="search-bar" className="lifted form-control" ref="input"  placeholder="Search for a place"   />
+                   <input tabIndex={0} type="text"  id="search-bar" label="Search for a place" aria-label="Search for a place" className="lifted form-control" ref="input"  placeholder="Search for a place"   />
                </div>
 
             </form>

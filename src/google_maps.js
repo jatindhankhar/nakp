@@ -11,8 +11,11 @@ class GoogleMaps extends Component {
       this.locationMarker = null;
       this.makeMarkers = this.makeMarkers.bind(this);
       this.setLocation = this.setLocation.bind(this);
+      this.showMap = this.showMap.bind(this);
       this.presentLocations = [];
       this.prevWindow = null;
+      this.state = {gMapsFailure: false};
+    
     }
     componentWillMount(){
         loadGoogleMap();
@@ -36,6 +39,7 @@ class GoogleMaps extends Component {
 
     showInfoWindow(idx){
        this.google.maps.event.trigger(this.markers[idx], 'click');
+       this.showMap(true);
     }
     setLocation(newLocation){
       this.setState({location:newLocation});
@@ -101,7 +105,15 @@ class GoogleMaps extends Component {
       this.markers = [];
     }
 
+
+     showMap(state = false){
+      this.setState({gMapsFailure: !state})
+    }
+
     componentDidMount(){
+        window.gm_authFailure = function() {
+          alert("Failed to load Google Maps")        
+        }  
         loadGoogleMap().then((google) => {
            this.google = google; 
            this.map = new google.maps.Map(document.getElementById('map'), {
@@ -109,12 +121,15 @@ class GoogleMaps extends Component {
             center: this.props.location,
             fullscreenControl: false
           });
-        });
+        }).catch(err => this.showMap(false));
       }
 
 
     render(){
-        return (<div id="map"></div>)
+          if(this.state.gMapsFailure)
+          return (<h1>Failed to load Google Maps</h1>)
+          else
+          return (<div id="map"></div>)
     }
 }
 

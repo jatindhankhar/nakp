@@ -16,8 +16,9 @@ class App extends Component {
     this.fetchPlaces = this.fetchPlaces.bind(this);
     this.syncMarkerLocations = this.syncMarkerLocations.bind(this);
     this.syncLocationIndex = this.syncLocationIndex.bind(this);
+    this.handleSidebarError = this.handleSidebarError.bind(this);
     /* Default Google Location */; 
-    this.state = {location: {lat: 28.5274229, lng: 77.1389453}, zoomLevel: 12, sidebarOpened:false, markerLocations: [], places: [], isLoading: true, selectedIndex: undefined}
+    this.state = {location: {lat: 28.5274229, lng: 77.1389453}, zoomLevel: 12, sidebarOpened:false, markerLocations: [], places: [], isError: false,isLoading: true, selectedIndex: undefined}
   }
 
   syncLocation(updatedLocation){
@@ -30,7 +31,9 @@ class App extends Component {
   }
 
  
-
+  handleSidebarError(){
+    this.setState({isLoading: false, isError: true})
+  }
   getUserLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(location => this.syncLocation({
@@ -43,7 +46,7 @@ class App extends Component {
   fetchPlaces(location){
     this.setState({places: []})
     if(!this.state.isLoading) this.setState({isLoading: true})
-    getPlacesInfo(location).then(this.setPlaces);    
+    getPlacesInfo(location).then(this.setPlaces).catch(this.handleSidebarError);    
   }
 
   setPlaces(response){
@@ -73,7 +76,7 @@ class App extends Component {
                       selectedIndex={this.state.selectedIndex} />
 
           <div id="over-map"> 
-             <Button color="info" id="toggle-sidebar" onClick={this.toggleSidebar}> <i className="fa fa-2x fa-bars"> </i> </Button> 
+             <Button aria-label="Toggle Sidebar" color="info" value="Toggle Sidebar" id="toggle-sidebar" onClick={this.toggleSidebar}> <i className="fa fa-2x fa-bars"> </i> </Button> 
              <SearchBox syncLocation={this.syncLocation} />
           </div>  
       </div>
@@ -82,6 +85,7 @@ class App extends Component {
               location={this.state.location} 
               isLoading={this.state.isLoading} 
               places={this.state.places}
+              isError={this.state.isError}
               syncMarkerLocations={this.syncMarkerLocations}
               syncLocationIndex={this.syncLocationIndex}
               />

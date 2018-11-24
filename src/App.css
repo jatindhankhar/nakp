@@ -10,10 +10,6 @@ body {
   overflow-y: hidden;
 }
 
-body {
-  background-color: aqua;
-}
-
 #app-container {
   position: relative;
  transition: margin-left .5s;

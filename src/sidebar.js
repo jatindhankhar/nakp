@@ -22,12 +22,13 @@ class SideBar extends Component {
     getPlaces(){
         
         if(this.props.isLoading) return(<Progress animated  value="100" />);
+        if(this.props.isError) return(<h2>There was some error</h2>)
         else if(!this.props.isLoading && this.state.locations && this.state.locations.length < 0)
             return <h4> No data available </h4>
         else
         return this.state.locations.map( (place,idx) => {
             return (
-                <li key={place.pageid} style={{cursor: 'pointer', marginBottom: '20px' }} onClick={evt => this.handlePlaceClick(idx)}>
+                <li tabIndex={0} key={place.pageid} style={{cursor: 'pointer', marginBottom: '20px' }} onClick={evt => this.handlePlaceClick(idx)}>
                    <h4>{place.title}</h4> 
                 </li>
             )
@@ -70,7 +71,7 @@ class SideBar extends Component {
             <div className={this.props.sidebarOpened ? "sidenav open" : "sidenav"}>
                 <div style={{padding: '10px'}} className="text-center">
                     <div className="input-group input-group-lg" style={{marginBottom: '22px'}}>
-                      <input type="text" className="lifted form-control" onChange={evt => this.handleSearch(evt)} placeholder="Type to filter"  />
+                      <input type="text" label="Type to filter" aria-label="Type to filter" className="lifted form-control" onChange={evt => this.handleSearch(evt)} placeholder="Type to filter"  />
                    </div>
                               
                 <ol>
